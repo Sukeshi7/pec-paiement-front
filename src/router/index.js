@@ -11,16 +11,21 @@ import TransactionDetailsView from '@/views/TransactionDetailsView.vue'
 import AdminDashboardView from '@/views/AdminDashboardView.vue'
 
 const routes = [
-  { path: '/', redirect: '/register' },
+  { path: '/', redirect: '/choose' },
   { path: '/login', component: LoginView },
   { path: '/activation-success', component: ActivationSuccessView },
   { path: '/dashboard', component: DashboardView },
   { path: '/register', component: RegisterMerchantView },
-   { path: '/admindashboard', component: AdminDashboardView },
+  { path: '/admin/dashboard', component: AdminDashboardView },
   {
     path: '/dashboard/create-transaction',
     component: CreateTransaction,
     meta: { requiresAuth: true },
+  },
+  {
+    path: '/choose',
+    name: 'ChooseLogin',
+    component: () => import('../views/ChooseLoginView.vue'),
   },
   {
     path: '/payment/:id',

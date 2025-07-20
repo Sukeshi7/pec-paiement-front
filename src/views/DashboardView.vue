@@ -63,7 +63,6 @@ const regenerateCredentials = async () => {
 }
 
 const openRefundModal = (transaction) => {
-  console.log('test');
   selectedTransaction.value = transaction
   showRefundModal.value = true
 }

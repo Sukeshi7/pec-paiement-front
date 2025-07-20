@@ -1,9 +1,19 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="min-h-screen bg-gray-100">
+    <AppNavbar v-if="showNavbar" />
+
     <router-view />
   </div>
-</template> 
-
+</template>
 
 <script setup>
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import AppNavbar from './components/NavbarView.vue'
+
+const route = useRoute()
+
+const hiddenRoutes = ['/login', '/admin/login', '/choose', '/register']
+
+const showNavbar = computed(() => !hiddenRoutes.includes(route.path))
 </script>
