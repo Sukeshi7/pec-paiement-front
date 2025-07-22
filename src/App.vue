@@ -13,7 +13,7 @@ import AppNavbar from './components/NavbarView.vue'
 
 const route = useRoute()
 
-const hiddenRoutes = ['/login', '/admin/login', '/choose', '/register']
+const hiddenRoutes = ['/login', '/admin/login', '/choose', '/register', '/test/cart', '/test/credentials', '/test/product', '/test/transactions', '/test/checkout']
 
 const showNavbar = computed(() => !hiddenRoutes.includes(route.path))
 </script>

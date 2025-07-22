@@ -81,13 +81,28 @@
           />
         </div>
       </div>
+      <div>
+          <label class="block text-sm font-medium mb-1">Url de votre boutique</label>
+          <input
+            v-model="form.shopUrl"
+            required
+            class="w-full border border-gray-300 rounded p-2"
+          />
+        </div>
       <button
         type="submit"
         class="mt-6 w-full bg-amber-600 text-white py-2 rounded hover:bg-amber-700 transition"
       >
         S'inscrire
       </button>
+      <button
+         @click="router.push('/login')"
+        class="mt-6 w-full bg-amber-600 text-white py-2 rounded hover:bg-amber-700 transition"
+      >
+        J'ai déja un compte
+      </button>
     </form>
+    
   </div>
 </template>
 
@@ -105,14 +120,15 @@ const form = ref({
   redirectSuccessUrl: '',
   redirectCancelUrl: '',
   currency: 'EUR',
+  shopUrl:'',
 })
 
 const errorMessage = ref('')
 const router = useRouter()
-
+const apiUrl = import.meta.env.VITE_API_URL
 const handleRegister = async () => {
   try {
-   const response =  await axios.post('http://localhost:3000/merchants', form.value);
+   const response =  await axios.post(`${apiUrl}/merchants`, form.value);
     alert("Inscription réussie ! Vérifiez votre email pour activer votre compte.");
   } catch (error) {
     errorMessage.value = "Erreur lors de l'inscription."

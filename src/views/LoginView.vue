@@ -10,10 +10,10 @@ const credentials = ref({
 
 const errorMessage = ref('')
 const router = useRouter()
-
+const apiUrl = import.meta.env.VITE_API_URL
 const handleLogin = async () => {
   try {
-    const response = await axios.post('http://localhost:3000/auth/login', credentials.value)
+    const response = await axios.post(`${apiUrl}/auth/login`, credentials.value)
     const { access_token } = response.data
     localStorage.setItem('token', access_token)
     router.push('/dashboard')
@@ -60,6 +60,12 @@ const handleLogin = async () => {
         class="w-full bg-amber-600 text-white py-2 rounded hover:bg-amber-700 transition"
       >
         Se connecter
+      </button>
+       <button
+         @click="router.push('/register')"
+        class="mt-6 w-full bg-amber-600 text-white py-2 rounded hover:bg-amber-700 transition"
+      >
+        Je n'ai pas encore de compte
       </button>
     </form>
   </div>

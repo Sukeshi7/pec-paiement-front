@@ -9,10 +9,10 @@ const refundAmount = ref(0)
 const operations = ref([])
 const message = ref('')
 const error = ref('')
-
+const apiUrl = import.meta.env.VITE_API_URL
 const fetchTransaction = async () => {
   try {
-    const { data } = await axios.get(`http://localhost:3000/transactions/${route.params.id}/operations`)
+    const { data } = await axios.get(`${apiUrl}/transactions/${route.params.id}/operations`)
     transaction.value = {
       id: data.transactionId,
     }
@@ -24,7 +24,7 @@ const fetchTransaction = async () => {
 
 const handleRefund = async () => {
   try {
-    await axios.post(`http://localhost:3000/transactions/${transaction.value.id}/refund`, {
+    await axios.post(`${apiUrl}/transactions/${transaction.value.id}/refund`, {
       amount: refundAmount.value,
     })
     message.value = 'Remboursement effectué avec succès'

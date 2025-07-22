@@ -1,4 +1,5 @@
 <script>
+const apiUrl = import.meta.env.VITE_API_URL
 export default {
     name: "AdminLogin",
     data() {
@@ -8,6 +9,7 @@ export default {
             error: ""
         };
     },
+    
     methods: {
         async handleLogin() {
             try {

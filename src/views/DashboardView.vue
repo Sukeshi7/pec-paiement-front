@@ -18,10 +18,10 @@ const selectedTransaction = ref(null)
 const newAppSecret = ref('')
 const error = ref('')
 const token = localStorage.getItem('token')
-
+const apiUrl = import.meta.env.VITE_API_URL
 const fetchMerchant = async () => {
   try {
-    const response = await axios.get('http://localhost:3000/merchants/me', {
+    const response = await axios.get(`${apiUrl}/merchants/me`, {
       headers: { Authorization: `Bearer ${token}` },
     })
     merchant.value = response.data.merchant
@@ -39,7 +39,7 @@ const fetchMerchant = async () => {
 
 const fetchTransactions = async () => {
   try {
-    const response = await axios.get('http://localhost:3000/transactions/merchant', {
+    const response = await axios.get(`${apiUrl}/transactions/merchant`, {
       headers: { Authorization: `Bearer ${token}` },
     })
     transactions.value = response.data.transactions

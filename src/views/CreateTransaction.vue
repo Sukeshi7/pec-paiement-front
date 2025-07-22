@@ -9,13 +9,13 @@ const redirectSuccessUrl = ref('https://google.com/success')
 const redirectCancelUrl = ref('https://bing.com/cancel')
 const callbackUrl = ref('https://webhook.site/3c5ce4fb-9895-42e9-961c-50c920416dc3')
 const paymentUrl = ref('')
-
+const apiUrl = import.meta.env.VITE_API_URL
 const handleSubmit = async () => {
   try {
     const token = localStorage.getItem('token')
 
     const response = await axios.post(
-      'http://localhost:3000/transactions',
+      `${apiUrl}/transactions`,
       {
         amount: amount.value,
         currency: currency.value,

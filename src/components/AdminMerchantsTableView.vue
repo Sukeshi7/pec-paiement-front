@@ -10,7 +10,8 @@ const message = ref('')
 
 const fetchMerchants = async () => {
   try {
-    const res = await axios.get('http://localhost:3000/admin/merchants', {
+    const apiUrl = import.meta.env.VITE_API_URL
+    const res = await axios.get(`${apiUrl}/admin/merchants`, {
       headers: { Authorization: `Bearer ${token}` }
     })
     merchants.value = res.data.merchants
@@ -21,7 +22,8 @@ const fetchMerchants = async () => {
 
 const toggleStatus = async (merchant) => {
   try {
-    const res = await axios.patch(`http://localhost:3000/admin/merchants/${merchant.id}/toggle`, {}, {
+    const apiUrl = import.meta.env.VITE_API_URL
+    const res = await axios.patch(`${apiUrl}/admin/merchants/${merchant.id}/toggle`, {}, {
       headers: { Authorization: `Bearer ${token}` }
     })
 

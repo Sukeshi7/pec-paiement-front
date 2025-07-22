@@ -86,7 +86,8 @@ const transactions = ref([])
 
 const fetchTransactions = async () => {
   try {
-    const { data } = await axios.get('http://localhost:3000/admin/transactions', {
+    const apiUrl = import.meta.env.VITE_API_URL
+    const { data } = await axios.get(`${apiUrl}/admin/transactions`, {
       headers: { Authorization: `Bearer ${token}` },
       params: {
         query: search.value,

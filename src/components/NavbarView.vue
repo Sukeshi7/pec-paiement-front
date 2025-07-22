@@ -1,6 +1,13 @@
 <template>
   <nav class="bg-white shadow p-4 flex justify-between items-center">
-    <div class="text-xl font-bold text-amber-600">PEC Paiement</div>
+    <div class="text-xl font-bold text-amber-600 w-52">
+      
+         <button
+        @click="router.push('/')"
+        class="w-full bg-amber-600 text-white py-2 rounded hover:bg-amber-700"
+      >
+     PEC Paiement
+      </button></div>
 
     <div>
       <button

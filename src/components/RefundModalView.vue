@@ -51,8 +51,9 @@ const error = ref('')
 const submitRefund = async () => {
   error.value = ''
   try {
+    const apiUrl = import.meta.env.VITE_API_URL
     const { data } = await axios.post(
-      `http://localhost:3000/transactions/${props.transactionId}/refund`,
+      `${apiUrl}/transactions/${props.transactionId}/refund`,
       { amount: refundAmount.value }
     )
     alert(data.message)

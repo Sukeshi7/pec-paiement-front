@@ -21,10 +21,10 @@ ChartJS.register(Title, Tooltip, Legend, ArcElement, BarElement, CategoryScale, 
 const stats = ref(null)
 const error = ref('')
 const token = localStorage.getItem('admin_token')
-
+const apiUrl = import.meta.env.VITE_API_URL
 const fetchStats = async () => {
   try {
-    const response = await axios.get('http://localhost:3000/admin/stats', {
+    const response = await axios.get(`${apiUrl}/admin/stats`, {
       headers: { Authorization: `Bearer ${token}` }
     })
     stats.value = response.data
