@@ -73,6 +73,7 @@ const addToCart = (product) => {
   const currentCart = JSON.parse(localStorage.getItem('cart') || '[]')
   currentCart.push(product)
   localStorage.setItem('cart', JSON.stringify(currentCart))
+  window.dispatchEvent(new Event('cart-updated'))
   alert(`${product.name} ajouté au panier !`)
 }
 </script>

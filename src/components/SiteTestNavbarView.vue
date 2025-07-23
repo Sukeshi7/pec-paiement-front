@@ -1,19 +1,11 @@
 <template>
   <nav class="bg-white shadow p-4 flex justify-between items-center">
-    <router-link to="/test/product" class="text-xl font-bold text-amber-600 hover:text-amber-700">
+    <router-link to="/product" class="text-xl font-bold text-amber-600 hover:text-amber-700">
       Site Test Paiement
     </router-link>
 
     <div class="flex items-center space-x-4">
-      <router-link to="/test/credentials" class="text-gray-700 hover:text-amber-600 text-sm font-medium">
-        Credentials
-      </router-link>
-
-      <router-link to="/test/transactions" class="text-gray-700 hover:text-amber-600 text-sm font-medium">
-        Transactions
-      </router-link>
-
-      <router-link to="/test/cart" class="relative">
+      <router-link to="/cart" class="relative">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-gray-700 hover:text-amber-600" fill="none"
           viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round"
@@ -31,13 +23,18 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const cartCount = ref(0)
 
 onMounted(() => {
   updateCartCount()
+  window.addEventListener('cart-updated', updateCartCount)
   window.addEventListener('storage', updateCartCount)
+})
+onUnmounted(() => {
+  window.removeEventListener('cart-updated', updateCartCount)
+  window.removeEventListener('storage', updateCartCount)
 })
 
 const updateCartCount = () => {

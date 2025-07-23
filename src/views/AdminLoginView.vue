@@ -13,7 +13,7 @@ export default {
     methods: {
         async handleLogin() {
             try {
-                const res = await fetch("http://localhost:3000/admin/login", {
+                const res = await fetch(`${apiUrl}/admin/login`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

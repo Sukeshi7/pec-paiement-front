@@ -10,14 +10,12 @@ const transactionId = localStorage.getItem('lastTransactionId')
 const apiUrl = import.meta.env.VITE_API_URL
 const fetchTransaction = async () => {
     try {
-        const merchantToken = localStorage.getItem('merchantToken')
-
         const { data } = await axios.get(`${apiUrl}/transactions/merchant`, {
             headers: {
                 Authorization: `Bearer ${merchantToken}`
             }
         })
-
+        console.log('test', data);
         transaction.value = data.transactions.find(t => t.id == transactionId)
         refundAmount.value = transaction.value?.amount || 0
     } catch (err) {

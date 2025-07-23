@@ -82,10 +82,11 @@
         </div>
       </div>
       <div>
-          <label class="block text-sm font-medium mb-1">Url de votre boutique</label>
+          <label class="block text-sm font-medium mb-1">Mot de passe</label>
           <input
-            v-model="form.shopUrl"
+            v-model="form.password"
             required
+            type="password"
             class="w-full border border-gray-300 rounded p-2"
           />
         </div>
@@ -120,7 +121,7 @@ const form = ref({
   redirectSuccessUrl: '',
   redirectCancelUrl: '',
   currency: 'EUR',
-  shopUrl:'',
+  password:'',
 })
 
 const errorMessage = ref('')

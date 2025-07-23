@@ -17,8 +17,10 @@ const checkStatus = async () => {
     const { data } = await axios.get(`${apiUrl}/transactions/${transactionId}`)
 
     if (data.status === 'success') {
+      localStorage.removeItem('cart')
       window.location.href = data.redirectSuccessUrl
     } else if (data.status === 'failed' || data.status === 'cancelled') {
+      localStorage.removeItem('cart')
       window.location.href = data.redirectCancelUrl
     }
   } catch (err) {

@@ -4,13 +4,14 @@ import axios from 'axios'
 import { useRouter } from 'vue-router'
 
 const credentials = ref({
-  appId: '',
-  appSecret: '',
+  email: '',
+  password: '',
 })
 
 const errorMessage = ref('')
 const router = useRouter()
 const apiUrl = import.meta.env.VITE_API_URL
+
 const handleLogin = async () => {
   try {
     const response = await axios.post(`${apiUrl}/auth/login`, credentials.value)
@@ -23,6 +24,7 @@ const handleLogin = async () => {
   }
 }
 </script>
+
 <template>
   <div class="min-h-screen bg-gray-100 flex items-center justify-center">
     <form
@@ -32,9 +34,9 @@ const handleLogin = async () => {
       <h1 class="text-2xl font-bold mb-6 text-center">Connexion Marchand</h1>
 
       <div class="mb-4">
-        <label class="block text-sm font-medium mb-1">App ID</label>
+        <label class="block text-sm font-medium mb-1">Email</label>
         <input
-          v-model="credentials.appId"
+          v-model="credentials.email"
           type="text"
           required
           class="w-full border border-gray-300 rounded p-2"
@@ -42,9 +44,9 @@ const handleLogin = async () => {
       </div>
 
       <div class="mb-4">
-        <label class="block text-sm font-medium mb-1">App Secret</label>
+        <label class="block text-sm font-medium mb-1">Mot de passe</label>
         <input
-          v-model="credentials.appSecret"
+          v-model="credentials.password"
           type="text"
           required
           class="w-full border border-gray-300 rounded p-2"

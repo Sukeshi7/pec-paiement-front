@@ -120,31 +120,30 @@ const createTransaction = async () => {
   loading.value = true
   error.value = ''
 
-  const token = localStorage.getItem('merchantToken')
-
+  const appId = import.meta.env.VITE_MERCHANT_APP_ID
+  const appSecret = import.meta.env.VITE_MERCHANT_APP_SECRET
   try {
-    const { data } = await axios.post(
-      `${apiUrl}/transactions`,
-      {
-        amount: total.value,
-        currency: 'EUR',
-        customer: client.value,
-        metadata: {
-          items: cart.value
-        },
-        redirectSuccessUrl: 'http://localhost:5173/siteTest/payment-success',
-        redirectCancelUrl: 'http://localhost:5173/siteTest/payment-cancel',
-        callbackUrl: `${apiUrl}/callback`
+    const { data } = await axios.post(`${apiUrl}/transactions`, {
+      amount: total.value,
+      currency: 'EUR',
+      customer: client.value,
+      metadata: {
+        items: cart.value
       },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }
-    )
+      redirectSuccessUrl: 'http://localhost:5173/payment-success',
+      redirectCancelUrl: 'http://localhost:5173/payment-cancel',
+      callbackUrl: `${apiUrl}/callback`
+     
+    },
+  {
+    headers: {
+      appId,
+      appSecret
+    }
+  })
 
     localStorage.setItem('lastTransactionId', data.transactionId)
-    router.push('/test/checkout')
+    router.push('/checkout')
   } catch (err) {
     console.error(err)
     error.value = 'Erreur lors de la création de la transaction.'
@@ -152,5 +151,6 @@ const createTransaction = async () => {
     loading.value = false
   }
 }
+
 </script>
 

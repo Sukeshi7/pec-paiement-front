@@ -51,7 +51,7 @@ const fetchTransactions = async () => {
 const regenerateCredentials = async () => {
   try {
     const response = await axios.post(
-      'http://localhost:3000/merchants/regenerate-credentials',
+      `${apiUrl}/merchants/regenerate-credentials`,
       {},
       { headers: { Authorization: `Bearer ${token}` } }
     )
@@ -79,7 +79,7 @@ onMounted(fetchMerchant)
   <div class="min-h-screen bg-gray-50 py-10 px-4">
     <div class="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8">
       <h1 class="text-3xl font-bold text-amber-600 mb-8 text-center flex items-center gap-2 justify-center">
-        <CreditCardIcon class="w-7 h-7" /> Espace Marchand
+        <CreditCardIcon class="w-7 h-7" /> Tabelau de bord Marchand
       </h1>
 
       <div v-if="merchant" class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">

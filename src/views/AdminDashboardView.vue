@@ -53,7 +53,7 @@ const pieData = computed(() => {
 
 <template>
   <div class="min-h-screen bg-gray-50 p-10">
-    <h1 class="text-3xl font-bold text-amber-600 mb-8 text-center">Dashboard Administrateur</h1>
+    <h1 class="text-3xl font-bold text-amber-600 mb-8 text-center">Tableau de bord Administrateur</h1>
 
     <div v-if="error" class="bg-red-100 text-red-800 p-4 rounded mb-6">{{ error }}</div>
 
@@ -78,15 +78,7 @@ const pieData = computed(() => {
         <h2 class="text-gray-500 text-sm mb-1">Taux de succès (%)</h2>
         <p class="text-3xl font-bold text-amber-600">{{ stats.successRate }}%</p>
       </div>
-      <div class="bg-white shadow p-6 rounded border">
-        <h2 class="text-gray-500 text-sm mb-1">Montants capturés / remboursés</h2>
-        <p class="text-lg font-medium text-gray-800">
-          Capturés : {{ stats.totalCaptured.toFixed(2) }} €
-        </p>
-        <p class="text-lg font-medium text-gray-800">
-          Remboursés : {{ stats.totalRefunded.toFixed(2) }} €
-        </p>
-      </div>
+      
     </div>
 
     <div class="bg-white p-6 rounded shadow border max-w-2xl mx-auto">

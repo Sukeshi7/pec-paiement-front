@@ -5,22 +5,21 @@ import AdminLogin from '../views/AdminLoginView.vue'
 import RegisterMerchantView from '@/views/RegisterMerchantView.vue'
 import ActivationSuccessView from '@/views/ActivationSuccessView.vue'
 import CreateTransaction from '../views/CreateTransaction.vue'
-import PaymentView from '@/views/PaymentView.vue'
 import TransactionDetailsView from '@/views/TransactionDetailsView.vue'
 import AdminDashboardView from '@/views/AdminDashboardView.vue'
-import PspPaymentView from '@/views/PspPaymentView.vue'
-import CredentialsView from '../views/siteTest/CredentialsView.vue'
-import CartView from '../views/siteTest/CartView.vue'
-import TransactionsView from '../views/siteTest/TransactionsView.vue'
-import PaymentViewSite from '@/views/siteTest/PaymentView.vue'
-import ProductView from '@/views/siteTest/ProductView.vue'
-import CheckoutView from '@/views/siteTest/CheckoutView.vue'
+import CartView from '../views/SimulatePaymentView.vue'
+import TransactionsView from '../views/TransactionsView.vue'
+import ProductView from '@/views/ProductView.vue'
+import CheckoutView from '@/views/CheckoutView.vue'
+import PayementProcessView from '@/views/PayementProcessView.vue'
+import PaymentSuccessView from '@/views/PaymentSuccessView.vue'
+import PaymentCancelView from '@/views/PaymentCancelView.vue'
+import ChooseLoginView from '@/views/ChooseLoginView.vue'
 const routes = [
   { path: '/', redirect: '/choose' },
   { path: '/login', component: LoginView },
   { path: '/activation-success', component: ActivationSuccessView },
   { path: '/dashboard', component: DashboardView },
-  { path: '/psp/payment', component: PspPaymentView },
   { path: '/register', component: RegisterMerchantView },
   { path: '/admin/dashboard', component: AdminDashboardView },
   {
@@ -30,50 +29,35 @@ const routes = [
   },
   {
     path: '/choose',
-    name: 'ChooseLogin',
-    component: () => import('../views/ChooseLoginView.vue'),
-  },
-  {
-    path: '/payment/:id',
-    component: PaymentView,
-    name: 'PaymentView',
+    component: ChooseLoginView
   },
   {
     path: '/dashboard/transactions/:id',
     component: TransactionDetailsView,
-    name: 'TransactionDetailsView',
   },
   {
-    path: '/test/credentials',
-    component: CredentialsView,
-    name: 'TestCredentials',
+    path: '/cart',
+    component: CartView,
   },
   {
-    path: '/test/cart',
-    component : CartView,
-    name: 'CartView',
+    path: '/transactions',
+    component: TransactionsView,
   },
   {
-    path: '/test/transactions',
-    component : TransactionsView,
-    name: 'TransactionsView',
-  },
- {
-    path: '/siteTest/payment/:id',
-    name: 'PaymentViewSite',
-    component: PaymentViewSite
+    path: '/product',
+    component: ProductView,
   },
   {
-    path: '/test/product',
-    name: 'ProductView',
-    component: ProductView
+    path: '/checkout',
+    component: CheckoutView,
   },
-   {
-    path: '/test/checkout',
-    name: 'CheckoutView',
-    component: CheckoutView
+  {
+    path: '/payment-processing',
+    component: PayementProcessView,
   },
   { path: '/admin/login', component: AdminLogin },
+  { path: '/payment-success', component: PaymentSuccessView },
+  { path: '/payment-cancel', component: PaymentCancelView },
 ]
 
 const router = createRouter({
