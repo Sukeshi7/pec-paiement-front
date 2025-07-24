@@ -14,9 +14,8 @@ import CheckoutView from '@/views/CheckoutView.vue'
 import PayementProcessView from '@/views/PayementProcessView.vue'
 import PaymentSuccessView from '@/views/PaymentSuccessView.vue'
 import PaymentCancelView from '@/views/PaymentCancelView.vue'
-import ChooseLoginView from '@/views/ChooseLoginView.vue'
 const routes = [
-  { path: '/', redirect: '/choose' },
+  { path: '/', redirect: '/product' },
   { path: '/login', component: LoginView },
   { path: '/activation-success', component: ActivationSuccessView },
   { path: '/dashboard', component: DashboardView },
@@ -26,10 +25,6 @@ const routes = [
     path: '/dashboard/create-transaction',
     component: CreateTransaction,
     meta: { requiresAuth: true },
-  },
-  {
-    path: '/choose',
-    component: ChooseLoginView
   },
   {
     path: '/dashboard/transactions/:id',
