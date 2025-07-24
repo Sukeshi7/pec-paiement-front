@@ -106,11 +106,6 @@ onMounted(fetchMerchant)
           class="bg-amber-600 hover:bg-amber-700 text-white px-6 py-2 rounded shadow flex items-center gap-2">
           <KeyIcon class="w-5 h-5" /> Régénérer APP_SECRET
         </button>
-
-        <router-link to="/dashboard/create-transaction"
-          class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-2 rounded shadow flex items-center gap-2 text-center justify-center">
-          <PlusIcon class="w-5 h-5" /> Créer une transaction
-        </router-link>
       </div>
 
       <div v-if="newAppSecret" class="mb-6 p-4 bg-amber-100 text-amber-800 rounded">

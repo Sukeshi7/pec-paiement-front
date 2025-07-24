@@ -51,35 +51,7 @@
             class="w-full border border-gray-300 rounded p-2"
           />
         </div>
-        <div>
-          <label class="block text-sm font-medium mb-1">Devise</label>
-          <select
-            v-model="form.currency"
-            required
-            class="w-full border border-gray-300 rounded p-2"
-          >
-            <option value="EUR">Euro</option>
-            <option value="USD">Dollar</option>
-          </select>
-        </div>
-        <div>
-          <label class="block text-sm font-medium mb-1">URL de succès</label>
-          <input
-            v-model="form.redirectSuccessUrl"
-            type="url"
-            required
-            class="w-full border border-gray-300 rounded p-2"
-          />
-        </div>
-        <div>
-          <label class="block text-sm font-medium mb-1">URL d'annulation</label>
-          <input
-            v-model="form.redirectCancelUrl"
-            type="url"
-            required
-            class="w-full border border-gray-300 rounded p-2"
-          />
-        </div>
+       
       </div>
       <div>
           <label class="block text-sm font-medium mb-1">Mot de passe</label>
@@ -118,9 +90,6 @@ const form = ref({
   contactName: '',
   contactEmail: '',
   contactPhone: '',
-  redirectSuccessUrl: '',
-  redirectCancelUrl: '',
-  currency: 'EUR',
   password:'',
 })
 

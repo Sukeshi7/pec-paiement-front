@@ -47,7 +47,7 @@ const handleLogin = async () => {
         <label class="block text-sm font-medium mb-1">Mot de passe</label>
         <input
           v-model="credentials.password"
-          type="text"
+          type="password"
           required
           class="w-full border border-gray-300 rounded p-2"
         />
