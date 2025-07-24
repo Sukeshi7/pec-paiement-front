@@ -147,23 +147,28 @@ const dailyAmountData = computed(() => {
 
     </div>
 
-    <div class="bg-white p-6 rounded shadow border max-w-2xl mx-auto">
-      <h2 class="text-lg font-semibold mb-4 text-gray-700">Répartition des statuts (Pie Chart)</h2>
-      <Pie v-if="pieData" :data="pieData" />
-    </div>
-    <div class="bg-white p-6 mt-8 rounded shadow border max-w-3xl mx-auto">
-      <h2 class="text-lg font-semibold mb-4 text-gray-700">Montants des transactions</h2>
-      <Bar v-if="barData" :data="barData" />
-    </div>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-10">
+  <div class="bg-white p-6 rounded shadow border">
+    <h2 class="text-lg font-semibold mb-4 text-gray-700">Répartition des statuts (Pie Chart)</h2>
+    <Pie v-if="pieData" :data="pieData" />
+  </div>
 
-    <div class="bg-white p-6 mt-8 rounded shadow border max-w-3xl mx-auto">
-      <h2 class="text-lg font-semibold mb-4 text-gray-700">Transactions par jour</h2>
-      <Bar v-if="dailyData" :data="dailyData" />
-    </div>
-    <div class="bg-white p-6 mt-8 rounded shadow border max-w-4xl mx-auto">
-      <h2 class="text-lg font-semibold mb-4 text-gray-700">Montant total par jour</h2>
-      <Line v-if="dailyAmountData" :data="dailyAmountData" />
-    </div>
+  <div class="bg-white p-6 rounded shadow border">
+    <h2 class="text-lg font-semibold mb-4 text-gray-700">Montants des transactions</h2>
+    <Bar v-if="barData" :data="barData" />
+  </div>
+
+  <div class="bg-white p-6 rounded shadow border">
+    <h2 class="text-lg font-semibold mb-4 text-gray-700">Transactions par jour</h2>
+    <Bar v-if="dailyData" :data="dailyData" />
+  </div>
+
+  <div class="bg-white p-6 rounded shadow border">
+    <h2 class="text-lg font-semibold mb-4 text-gray-700">Montant total par jour</h2>
+    <Line v-if="dailyAmountData" :data="dailyAmountData" />
+  </div>
+</div>
+
 
 
     <AdminTransactionView />
