@@ -168,9 +168,6 @@ const dailyAmountData = computed(() => {
     <Line v-if="dailyAmountData" :data="dailyAmountData" />
   </div>
 </div>
-
-
-
     <AdminTransactionView />
     <AdminMerchantsTableView />
   </div>
