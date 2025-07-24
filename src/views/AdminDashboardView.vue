@@ -66,9 +66,9 @@ const pieData = computed(() => {
 })
 
 const barData = computed(() => {
-  if (!advancedStats.value) return null
+  if (!advancedStats.value) return { labels: [], datasets: [] }
   return {
-    labels: ['Success', 'Failed'],
+    labels: ['Succès', 'Échecs'],
     datasets: [
       {
         label: 'Montant total (€)',
@@ -83,7 +83,7 @@ const barData = computed(() => {
 })
 
 const dailyData = computed(() => {
-  if (!advancedStats.value) return null
+  if (!advancedStats.value || !advancedStats.value.transactionsPerDay) return { labels: [], datasets: [] }
   return {
     labels: advancedStats.value.transactionsPerDay.map(t => t.date),
     datasets: [
@@ -97,7 +97,7 @@ const dailyData = computed(() => {
 })
 
 const dailyAmountData = computed(() => {
-  if (!advancedStats.value) return null
+  if (!advancedStats.value || !advancedStats.value.transactionsPerDay) return { labels: [], datasets: [] }
   return {
     labels: advancedStats.value.transactionsPerDay.map(t => t.date),
     datasets: [
@@ -112,7 +112,6 @@ const dailyAmountData = computed(() => {
     ]
   }
 })
-
 
 </script>
 

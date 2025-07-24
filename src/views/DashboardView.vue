@@ -11,6 +11,20 @@ import {
   ArrowUturnLeftIcon
 } from '@heroicons/vue/24/solid'
 
+import { Bar } from 'vue-chartjs'
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale
+} from 'chart.js'
+
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+
+const chartStats = ref(null)
 const merchant = ref(null)
 const transactions = ref([])
 const showRefundModal = ref(false)
@@ -19,6 +33,56 @@ const newAppSecret = ref('')
 const error = ref('')
 const token = localStorage.getItem('token')
 const apiUrl = import.meta.env.VITE_API_URL
+
+const fetchChartStats = async () => {
+  try {
+    const response = await axios.get(`${apiUrl}/merchants/dashboard-stats`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    chartStats.value = response.data
+  } catch (err) {
+    console.error('Erreur récupération stats chart', err)
+  }
+}
+
+onMounted(() => {
+  fetchMerchant()
+  fetchChartStats()
+})
+
+const barData = computed(() => {
+  if (!chartStats.value) return null
+  return {
+    labels: ['Succès', 'Échecs'],
+    datasets: [
+      {
+        label: 'Montant (€)',
+        data: [
+          chartStats.value.totalAmountSuccess,
+          chartStats.value.totalAmountFailed
+        ],
+        backgroundColor: ['#10B981', '#EF4444']
+      }
+    ]
+  }
+})
+
+const dailyData = computed(() => {
+  if (!chartStats.value) return null
+  return {
+    labels: chartStats.value.transactionsPerDay.map(t => t.date),
+    datasets: [
+      {
+        label: 'Transactions / jour',
+        data: chartStats.value.transactionsPerDay.map(t => t.count),
+        backgroundColor: '#3B82F6'
+      }
+    ]
+  }
+})
+
+
+
 const fetchMerchant = async () => {
   try {
     const response = await axios.get(`${apiUrl}/merchants/me`, {
@@ -115,6 +179,17 @@ onMounted(fetchMerchant)
 
       <div v-if="error" class="mb-6 p-4 bg-red-100 text-red-800 rounded">
         {{ error }}
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-12">
+        <div class="bg-white p-4 border rounded shadow">
+          <h2 class="font-semibold text-gray-700 mb-4">Montants des transactions</h2>
+          <Bar v-if="barData" :data="barData" />
+        </div>
+        <div class="bg-white p-4 border rounded shadow">
+          <h2 class="font-semibold text-gray-700 mb-4">Transactions par jour</h2>
+          <Bar v-if="dailyData" :data="dailyData" />
+        </div>
       </div>
 
       <div v-if="transactions.length" class="overflow-x-auto">
