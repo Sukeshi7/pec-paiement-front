@@ -3,11 +3,11 @@
     <router-link to="/product" class="text-xl font-bold text-amber-600 hover:text-amber-700">
       Site Test Paiement
     </router-link>
-    <div class="space-x-4">
-      <router-link to="/admin/login" class="text-sm text-gray-700 hover:text-amber-600">
+    <div class="space-x-8">
+      <router-link to="/admin/login" class="text-xl text-gray-700 hover:text-amber-600">
         Connexion Admin
       </router-link>
-      <router-link to="/login" class="text-sm text-gray-700 hover:text-amber-600">
+      <router-link to="/login" class="text-xl text-gray-700 hover:text-amber-600">
         Connexion Marchand
       </router-link>
     </div>
