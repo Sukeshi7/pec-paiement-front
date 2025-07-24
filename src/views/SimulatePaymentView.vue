@@ -130,8 +130,8 @@ const createTransaction = async () => {
       metadata: {
         items: cart.value
       },
-      redirectSuccessUrl: `${process.env.VITE_FRONT_URL}/payment-success`,
-      redirectCancelUrl: `${process.env.VITE_FRONT_URL}/payment-cancel`,
+      redirectSuccessUrl: `${window.location.origin}/payment-success`,
+      redirectCancelUrl: `${window.location.origin}/payment-cancel`,
       callbackUrl: `${apiUrl}/callback`
      
     },
