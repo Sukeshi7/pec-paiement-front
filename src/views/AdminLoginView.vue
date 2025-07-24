@@ -1,4 +1,5 @@
 <script>
+import SiteTestNavbarView from '@/components/SiteTestNavbarView.vue';
 const apiUrl = import.meta.env.VITE_API_URL
 export default {
     name: "AdminLogin",
@@ -47,6 +48,7 @@ export default {
 };
 </script>
 <template>
+    <SiteTestNavbarView/>
     <div class="min-h-screen flex items-center justify-center bg-gray-100">
         <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
             <h2 class="text-2xl font-bold mb-6 text-center">Connexion Admin</h2>

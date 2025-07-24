@@ -1,4 +1,32 @@
+
+<script setup>
+import { ref } from 'vue'
+import axios from 'axios'
+import { useRouter } from 'vue-router'
+import SiteTestNavbarView from '@/components/SiteTestNavbarView.vue'
+const form = ref({
+  companyName: '',
+  Kbis: '',
+  contactName: '',
+  contactEmail: '',
+  contactPhone: '',
+  password: '',
+})
+
+const errorMessage = ref('')
+const router = useRouter()
+const apiUrl = import.meta.env.VITE_API_URL
+const handleRegister = async () => {
+  try {
+    const response = await axios.post(`${apiUrl}/merchants`, form.value);
+    alert("Inscription réussie ! Vérifiez votre email pour activer votre compte.");
+  } catch (error) {
+    errorMessage.value = "Erreur lors de l'inscription."
+  }
+}
+</script>
 <template>
+  <SiteTestNavbarView/>
   <div class="min-h-screen bg-gray-100 flex items-center justify-center">
     <form @submit.prevent="handleRegister" class="bg-white p-8 rounded shadow-md w-full max-w-4xl">
       <h1 class="text-2xl font-bold mb-6 text-center">Inscription Marchand</h1>
@@ -41,29 +69,3 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-import axios from 'axios'
-import { useRouter } from 'vue-router'
-
-const form = ref({
-  companyName: '',
-  Kbis: '',
-  contactName: '',
-  contactEmail: '',
-  contactPhone: '',
-  password: '',
-})
-
-const errorMessage = ref('')
-const router = useRouter()
-const apiUrl = import.meta.env.VITE_API_URL
-const handleRegister = async () => {
-  try {
-    const response = await axios.post(`${apiUrl}/merchants`, form.value);
-    alert("Inscription réussie ! Vérifiez votre email pour activer votre compte.");
-  } catch (error) {
-    errorMessage.value = "Erreur lors de l'inscription."
-  }
-}
-</script>
