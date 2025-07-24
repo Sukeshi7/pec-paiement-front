@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import axios from 'axios'
-import { Pie, Bar } from 'vue-chartjs'
+import { Pie, Bar, Line } from 'vue-chartjs'
 import AdminTransactionView from '@/components/AdminTransactionView.vue'
 import AdminMerchantsTableView from '@/components/AdminMerchantsTableView.vue'
 
@@ -32,8 +32,23 @@ const fetchStats = async () => {
     error.value = 'Erreur de chargement des statistiques'
   }
 }
+const advancedStats = ref(null)
 
-onMounted(fetchStats)
+const fetchAdvancedStats = async () => {
+  try {
+    const response = await axios.get(`${apiUrl}/admin/chart-stats`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    advancedStats.value = response.data
+  } catch (err) {
+    console.error('Erreur récupération des stats graphiques', err)
+  }
+}
+
+onMounted(() => {
+  fetchStats()
+  fetchAdvancedStats()
+})
 
 const pieData = computed(() => {
   if (!stats.value) return null
@@ -49,6 +64,56 @@ const pieData = computed(() => {
     }]
   }
 })
+
+const barData = computed(() => {
+  if (!advancedStats.value) return null
+  return {
+    labels: ['Success', 'Failed'],
+    datasets: [
+      {
+        label: 'Montant total (€)',
+        data: [
+          advancedStats.value.totalAmountSuccess,
+          advancedStats.value.totalAmountFailed
+        ],
+        backgroundColor: ['#10B981', '#EF4444']
+      }
+    ]
+  }
+})
+
+const dailyData = computed(() => {
+  if (!advancedStats.value) return null
+  return {
+    labels: advancedStats.value.transactionsPerDay.map(t => t.date),
+    datasets: [
+      {
+        label: 'Transactions / jour',
+        data: advancedStats.value.transactionsPerDay.map(t => t.count),
+        backgroundColor: '#3B82F6'
+      }
+    ]
+  }
+})
+
+const dailyAmountData = computed(() => {
+  if (!advancedStats.value) return null
+  return {
+    labels: advancedStats.value.transactionsPerDay.map(t => t.date),
+    datasets: [
+      {
+        label: 'Montant (€) / jour',
+        data: advancedStats.value.transactionsPerDay.map(t => t.amount),
+        borderColor: '#8B5CF6',
+        backgroundColor: 'rgba(139, 92, 246, 0.2)',
+        tension: 0.4,
+        fill: true
+      }
+    ]
+  }
+})
+
+
 </script>
 
 <template>
@@ -78,14 +143,29 @@ const pieData = computed(() => {
         <h2 class="text-gray-500 text-sm mb-1">Taux de succès (%)</h2>
         <p class="text-3xl font-bold text-amber-600">{{ stats.successRate }}%</p>
       </div>
-      
+
     </div>
 
     <div class="bg-white p-6 rounded shadow border max-w-2xl mx-auto">
       <h2 class="text-lg font-semibold mb-4 text-gray-700">Répartition des statuts (Pie Chart)</h2>
       <Pie v-if="pieData" :data="pieData" />
     </div>
-    <AdminTransactionView/>
-    <AdminMerchantsTableView/>
+    <div class="bg-white p-6 mt-8 rounded shadow border max-w-3xl mx-auto">
+      <h2 class="text-lg font-semibold mb-4 text-gray-700">Montants des transactions</h2>
+      <Bar v-if="barData" :data="barData" />
+    </div>
+
+    <div class="bg-white p-6 mt-8 rounded shadow border max-w-3xl mx-auto">
+      <h2 class="text-lg font-semibold mb-4 text-gray-700">Transactions par jour</h2>
+      <Bar v-if="dailyData" :data="dailyData" />
+    </div>
+    <div class="bg-white p-6 mt-8 rounded shadow border max-w-4xl mx-auto">
+      <h2 class="text-lg font-semibold mb-4 text-gray-700">Montant total par jour</h2>
+      <Line v-if="dailyAmountData" :data="dailyAmountData" />
+    </div>
+
+
+    <AdminTransactionView />
+    <AdminMerchantsTableView />
   </div>
 </template>
