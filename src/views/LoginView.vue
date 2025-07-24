@@ -11,7 +11,7 @@ const credentials = ref({
 const errorMessage = ref('')
 const router = useRouter()
 const apiUrl = import.meta.env.VITE_API_URL
-
+console.log(apiUrl);
 const handleLogin = async () => {
   try {
     const response = await axios.post(`${apiUrl}/auth/login`, credentials.value)
