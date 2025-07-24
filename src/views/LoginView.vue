@@ -3,7 +3,6 @@ import { ref } from 'vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
 import SiteTestNavbarView from '@/components/SiteTestNavbarView.vue'
-import SiteTestNavbarView from '@/components/SiteTestNavbarView.vue'
 const credentials = ref({
   email: '',
   password: '',
