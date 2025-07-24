@@ -23,7 +23,7 @@
           {{ cartCount }}
         </span>
       </router-link>
-    </div>``
+    </div>
   </nav>
 </template>
 
