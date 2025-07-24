@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import axios from 'axios'
+import { useRouter } from 'vue-router'
 
 const token = localStorage.getItem('admin_token')
 const merchants = ref([])
@@ -8,9 +9,11 @@ const search = ref('')
 const error = ref('')
 const message = ref('')
 
+const router = useRouter()
+const apiUrl = import.meta.env.VITE_API_URL
+
 const fetchMerchants = async () => {
   try {
-    const apiUrl = import.meta.env.VITE_API_URL
     const res = await axios.get(`${apiUrl}/admin/merchants`, {
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -22,7 +25,6 @@ const fetchMerchants = async () => {
 
 const toggleStatus = async (merchant) => {
   try {
-    const apiUrl = import.meta.env.VITE_API_URL
     const res = await axios.patch(`${apiUrl}/admin/merchants/${merchant.id}/toggle`, {}, {
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -39,6 +41,19 @@ const toggleStatus = async (merchant) => {
   }
 }
 
+const impersonate = async (merchantId) => {
+  try {
+    const res = await axios.post(`${apiUrl}/admin/impersonate/${merchantId}`, {}, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+
+    localStorage.setItem('merchant_token', res.data.token)
+    router.push('/dashboard')
+  } catch (err) {
+    error.value = 'Échec de l’impersonation du marchand.'
+  }
+}
+
 const filteredMerchants = computed(() => {
   return merchants.value.filter(m =>
     m.companyName.toLowerCase().includes(search.value.toLowerCase()) ||
@@ -48,6 +63,7 @@ const filteredMerchants = computed(() => {
 
 onMounted(fetchMerchants)
 </script>
+
 <template>
   <div class="bg-white p-6 rounded shadow border">
     <div class="flex items-center justify-between mb-4">
@@ -67,7 +83,7 @@ onMounted(fetchMerchants)
           <th class="p-2 border">Nom</th>
           <th class="p-2 border">Email</th>
           <th class="p-2 border">Statut</th>
-          <th class="p-2 border text-center">Action</th>
+          <th class="p-2 border text-center">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -80,13 +96,20 @@ onMounted(fetchMerchants)
               {{ merchant.isActive ? 'Actif' : 'Inactif' }}
             </span>
           </td>
-          <td class="p-2 border text-center">
+          <td class="p-2 border text-center space-x-2">
             <button
               @click="toggleStatus(merchant)"
               class="px-3 py-1 text-xs rounded text-white"
               :class="merchant.isActive ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'"
             >
               {{ merchant.isActive ? 'Désactiver' : 'Activer' }}
+            </button>
+
+            <button
+              @click="impersonate(merchant.id)"
+              class="px-3 py-1 text-xs rounded bg-blue-600 hover:bg-blue-700 text-white"
+            >
+              Se connecter
             </button>
           </td>
         </tr>
