@@ -13,10 +13,12 @@ import {
   ArcElement,
   BarElement,
   CategoryScale,
-  LinearScale
+  LinearScale,
+   PointElement,       
+  LineElement 
 } from 'chart.js'
 
-ChartJS.register(Title, Tooltip, Legend, ArcElement, BarElement, CategoryScale, LinearScale)
+ChartJS.register(Title, Tooltip, Legend, ArcElement, BarElement, CategoryScale, LinearScale, PointElement,LineElement )
 
 const stats = ref(null)
 const error = ref('')
