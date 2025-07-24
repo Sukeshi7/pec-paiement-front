@@ -36,7 +36,7 @@ const advancedStats = ref(null)
 
 const fetchAdvancedStats = async () => {
   try {
-    const response = await axios.get(`${apiUrl}/stats/graph-data`, {
+    const response = await axios.get(`${apiUrl}/admin/graph-data`, {
       headers: { Authorization: `Bearer ${token}` }
     })
     advancedStats.value = response.data
