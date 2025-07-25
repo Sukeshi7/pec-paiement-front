@@ -38,42 +38,43 @@ onMounted(fetchTransaction)
 </script>
 
 <template>
-  <div class="max-w-2xl mx-auto mt-10 bg-white shadow p-6 rounded">
-    <h2 class="text-2xl font-bold mb-4">Détails de la transaction #{{ transaction.id }}</h2>
+  <div class="max-w-2xl mx-auto mt-10 bg-white shadow-md p-6 rounded-xl font-satoshi border border-emerald-100">
+    <h2 class="text-2xl font-bold mb-6 text-emerald-700">Détails de la transaction #{{ transaction.id }}</h2>
 
     <div v-if="operations.length">
-      <h3 class="font-semibold mb-2">Historique des opérations :</h3>
-      <ul class="mb-4 space-y-1">
+      <h3 class="font-semibold text-gray-700 mb-2">Historique des opérations :</h3>
+      <ul class="mb-4 space-y-2">
         <li
           v-for="op in operations"
           :key="op.id"
-          class="border p-2 rounded flex justify-between items-center"
+          class="border p-2 rounded-lg bg-gray-50 flex justify-between items-center"
         >
-          <span class="capitalize">{{ op.type }}</span>
-          <span>{{ op.amount }} €</span>
+          <span class="capitalize text-gray-700">{{ op.type }}</span>
+          <span class="font-semibold text-gray-800">{{ op.amount }} €</span>
           <span class="text-sm text-gray-500">{{ op.createdAt.slice(0, 10) }}</span>
         </li>
       </ul>
     </div>
 
     <div class="mb-4">
-      <label class="block font-medium mb-1">Montant à rembourser (€)</label>
+      <label class="block font-medium mb-1 text-gray-700">Montant à rembourser (€)</label>
       <input
         type="number"
         v-model="refundAmount"
         min="1"
-        class="w-full border rounded p-2"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500"
       />
     </div>
 
     <button
       @click="handleRefund"
-      class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded"
+      class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition"
     >
       Rembourser
     </button>
 
-    <div v-if="message" class="mt-4 text-green-600">{{ message }}</div>
-    <div v-if="error" class="mt-4 text-red-600">{{ error }}</div>
+    <div v-if="message" class="mt-4 text-green-600 font-medium">{{ message }}</div>
+    <div v-if="error" class="mt-4 text-red-600 font-medium">{{ error }}</div>
   </div>
 </template>
+

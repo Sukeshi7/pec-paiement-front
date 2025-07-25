@@ -1,19 +1,19 @@
 <template>
-  <nav class="bg-white shadow p-4 flex justify-between items-center">
-    <div class="text-xl font-bold text-amber-600 w-52">
-      
-         <button
+  <nav class="bg-white shadow p-4 flex justify-between items-center font-satoshi">
+    <div class="text-xl font-bold text-emerald-700 w-52">
+      <button
         @click="router.push('/')"
-        class="w-full bg-amber-600 text-white py-2 rounded hover:bg-amber-700"
+        class="w-full bg-emerald-600 text-white py-2 rounded-lg hover:bg-emerald-700 transition"
       >
-     PEC Paiement
-      </button></div>
+        PEC Paiement
+      </button>
+    </div>
 
     <div>
       <button
         v-if="isAdminLoggedIn"
         @click="logout('admin')"
-        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+        class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
       >
         Déconnexion admin
       </button>
@@ -21,13 +21,14 @@
       <button
         v-else-if="isMerchantLoggedIn"
         @click="logout('merchant')"
-        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+        class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
       >
         Déconnexion marchand
       </button>
     </div>
   </nav>
 </template>
+
 
 <script setup>
 import { computed } from 'vue'

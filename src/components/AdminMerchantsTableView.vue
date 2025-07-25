@@ -65,58 +65,59 @@ onMounted(fetchMerchants)
 </script>
 
 <template>
-  <div class="bg-white p-6 rounded shadow border">
+  <div class="bg-white p-6 rounded-xl shadow-md border border-emerald-100 font-satoshi">
     <div class="flex items-center justify-between mb-4">
-      <h2 class="text-xl font-semibold text-gray-700">Marchands</h2>
+      <h2 class="text-xl font-semibold text-emerald-700">Marchands</h2>
       <input
         v-model="search"
         type="text"
         placeholder="Rechercher par nom ou email"
-        class="border px-3 py-2 rounded w-64 text-sm"
+        class="border border-gray-300 rounded-lg px-3 py-2 w-64 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
       />
     </div>
 
-    <table class="w-full text-sm text-left border">
-      <thead class="bg-gray-100">
-        <tr>
-          <th class="p-2 border">ID</th>
-          <th class="p-2 border">Nom</th>
-          <th class="p-2 border">Email</th>
-          <th class="p-2 border">Statut</th>
-          <th class="p-2 border text-center">Actions</th>
-        </tr>
+    <table class="w-full text-sm text-left border border-emerald-100 rounded-lg overflow-hidden">
+      <thead class="bg-emerald-50 text-emerald-800">
+      <tr>
+        <th class="p-3 border">ID</th>
+        <th class="p-3 border">Nom</th>
+        <th class="p-3 border">Email</th>
+        <th class="p-3 border">Statut</th>
+        <th class="p-3 border text-center">Actions</th>
+      </tr>
       </thead>
       <tbody>
-        <tr v-for="merchant in filteredMerchants" :key="merchant.id" class="hover:bg-gray-50">
-          <td class="p-2 border">{{ merchant.id }}</td>
-          <td class="p-2 border">{{ merchant.companyName }}</td>
-          <td class="p-2 border">{{ merchant.contactEmail }}</td>
-          <td class="p-2 border">
-            <span :class="merchant.isActive ? 'text-green-600' : 'text-red-500'">
+      <tr v-for="merchant in filteredMerchants" :key="merchant.id" class="hover:bg-emerald-50">
+        <td class="p-2 border">{{ merchant.id }}</td>
+        <td class="p-2 border">{{ merchant.companyName }}</td>
+        <td class="p-2 border">{{ merchant.contactEmail }}</td>
+        <td class="p-2 border">
+            <span :class="merchant.isActive ? 'text-emerald-600' : 'text-red-500'">
               {{ merchant.isActive ? 'Actif' : 'Inactif' }}
             </span>
-          </td>
-          <td class="p-2 border text-center space-x-2">
-            <button
-              @click="toggleStatus(merchant)"
-              class="px-3 py-1 text-xs rounded text-white"
-              :class="merchant.isActive ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'"
-            >
-              {{ merchant.isActive ? 'Désactiver' : 'Activer' }}
-            </button>
+        </td>
+        <td class="p-2 border text-center space-x-2">
+          <button
+            @click="toggleStatus(merchant)"
+            class="px-3 py-1 text-xs rounded-lg text-white transition"
+            :class="merchant.isActive ? 'bg-red-500 hover:bg-red-600' : 'bg-emerald-600 hover:bg-emerald-700'"
+          >
+            {{ merchant.isActive ? 'Désactiver' : 'Activer' }}
+          </button>
 
-            <button
-              @click="impersonate(merchant.id)"
-              class="px-3 py-1 text-xs rounded bg-blue-600 hover:bg-blue-700 text-white"
-            >
-              Se connecter
-            </button>
-          </td>
-        </tr>
+          <button
+            @click="impersonate(merchant.id)"
+            class="px-3 py-1 text-xs rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition"
+          >
+            Se connecter
+          </button>
+        </td>
+      </tr>
       </tbody>
     </table>
 
     <p v-if="error" class="mt-4 text-red-600 text-sm">{{ error }}</p>
-    <p v-if="message" class="mt-4 text-green-600 text-sm">{{ message }}</p>
+    <p v-if="message" class="mt-4 text-emerald-600 text-sm">{{ message }}</p>
   </div>
 </template>
+

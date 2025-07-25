@@ -26,31 +26,31 @@ const handleLogin = async () => {
 </script>
 
 <template>
-  <SiteTestNavbarView/>
-  <div class="min-h-screen bg-gray-100 flex items-center justify-center">
+  <SiteTestNavbarView />
+  <div class="min-h-screen bg-gray-50 flex items-center justify-center font-satoshi">
     <form
       @submit.prevent="handleLogin"
-      class="bg-white p-8 rounded shadow-md w-full max-w-md"
+      class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-emerald-100"
     >
-      <h1 class="text-2xl font-bold mb-6 text-center">Connexion Marchand</h1>
+      <h1 class="text-2xl font-bold mb-6 text-center text-emerald-700">Connexion Marchand</h1>
 
       <div class="mb-4">
-        <label class="block text-sm font-medium mb-1">Email</label>
+        <label class="block text-sm font-medium mb-1 text-gray-700">Email</label>
         <input
           v-model="credentials.email"
-          type="text"
+          type="email"
           required
-          class="w-full border border-gray-300 rounded p-2"
+          class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
         />
       </div>
 
       <div class="mb-4">
-        <label class="block text-sm font-medium mb-1">Mot de passe</label>
+        <label class="block text-sm font-medium mb-1 text-gray-700">Mot de passe</label>
         <input
           v-model="credentials.password"
           type="password"
           required
-          class="w-full border border-gray-300 rounded p-2"
+          class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
         />
       </div>
 
@@ -60,19 +60,17 @@ const handleLogin = async () => {
 
       <button
         type="submit"
-        class="w-full bg-amber-600 text-white py-2 rounded hover:bg-amber-700 transition"
+        class="w-full bg-emerald-600 text-white py-2 rounded-xl hover:bg-emerald-700 transition"
       >
         Se connecter
       </button>
-       <button
-         @click="router.push('/register')"
-        class="mt-6 w-full bg-amber-600 text-white py-2 rounded hover:bg-amber-700 transition"
+
+      <button
+        @click="router.push('/register')"
+        class="mt-6 w-full bg-emerald-500 text-white py-2 rounded-xl hover:bg-emerald-600 transition"
       >
         Je n'ai pas encore de compte
       </button>
     </form>
   </div>
 </template>
-
-
-

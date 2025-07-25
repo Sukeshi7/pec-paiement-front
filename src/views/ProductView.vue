@@ -1,24 +1,24 @@
 <template>
-<SiteTestNavbarView/>
-  <div class="max-w-6xl mx-auto px-4 py-10">
-    <h1 class="text-3xl font-bold text-gray-800 mb-8 text-center">Nos Produits</h1>
+  <SiteTestNavbarView />
+  <div class="max-w-6xl mx-auto px-4 py-10 font-satoshi">
+    <h1 class="text-3xl font-bold text-emerald-800 mb-8 text-center">Nos Produits</h1>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
       <div
         v-for="product in products"
         :key="product.id"
-        class="bg-white shadow rounded-lg p-4 flex flex-col"
+        class="bg-white shadow-md rounded-xl p-4 flex flex-col border border-emerald-50"
       >
         <img
           :src="product.image"
           :alt="product.name"
-          class="w-full h-40 object-cover rounded mb-4"
+          class="w-full h-40 object-cover rounded-lg mb-4"
         />
         <h2 class="text-lg font-semibold text-gray-800 mb-2">{{ product.name }}</h2>
-        <p class="text-amber-600 font-bold mb-4">{{ product.price }} €</p>
+        <p class="text-emerald-600 font-bold mb-4">{{ product.price }} €</p>
         <button
           @click="addToCart(product)"
-          class="mt-auto bg-amber-600 hover:bg-amber-700 text-white py-2 px-4 rounded"
+          class="mt-auto bg-emerald-600 hover:bg-emerald-700 text-white py-2 px-4 rounded-lg transition"
         >
           Ajouter au panier
         </button>
@@ -26,6 +26,7 @@
     </div>
   </div>
 </template>
+
 
 <script setup>
 import { ref } from 'vue'

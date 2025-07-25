@@ -44,24 +44,41 @@ onMounted(() => {
 
 <template>
   <SiteTestNavbarView />
-  <div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="min-h-screen flex items-center justify-center bg-gray-50 font-satoshi">
     <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
-      <h2 class="text-2xl font-bold mb-6 text-center">Connexion Admin</h2>
+      <h2 class="text-3xl font-bold mb-6 text-center text-emerald-700">Connexion Admin</h2>
+
       <form @submit.prevent="handleLogin">
         <div class="mb-4">
-          <label class="block text-gray-700">Email</label>
-          <input v-model="email" type="email" required
-            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-400" />
+          <label class="block text-sm font-medium text-gray-700">Email</label>
+          <input
+            v-model="email"
+            type="email"
+            required
+            class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
+          />
         </div>
+
         <div class="mb-4">
-          <label class="block text-gray-700">Mot de passe</label>
-          <input v-model="password" type="password" required
-            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-400" />
+          <label class="block text-sm font-medium text-gray-700">Mot de passe</label>
+          <input
+            v-model="password"
+            type="password"
+            required
+            class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
+          />
         </div>
-        <button type="submit"
-          class="w-full bg-amber-600 text-white py-2 rounded hover:bg-amber-700 transition">Se connecter</button>
-        <p v-if="error" class="text-red-500 text-sm mt-4">{{ error }}</p>
+
+        <button
+          type="submit"
+          class="w-full bg-emerald-700 text-white py-2 rounded-lg hover:bg-emerald-600 transition font-semibold"
+        >
+          Se connecter
+        </button>
+
+        <p v-if="error" class="text-red-500 text-sm mt-4 text-center">{{ error }}</p>
       </form>
     </div>
   </div>
 </template>
+

@@ -1,10 +1,11 @@
 <template>
-  <div class="h-screen flex flex-col justify-center items-center bg-gray-100 text-center px-4">
-    <h1 class="text-2xl font-semibold text-gray-800 mb-2">Paiement en cours...</h1>
-    <p class="text-gray-600">Merci de patienter pendant le traitement de votre paiement.</p>
-    <div class="mt-8 animate-spin rounded-full h-12 w-12 border-t-4 border-amber-600 border-opacity-50"></div>
+  <div class="h-screen flex flex-col justify-center items-center bg-emerald-50 text-center px-4 font-satoshi">
+    <h1 class="text-2xl font-semibold text-emerald-800 mb-2">Paiement en cours...</h1>
+    <p class="text-emerald-700">Merci de patienter pendant le traitement de votre paiement.</p>
+    <div class="mt-8 animate-spin rounded-full h-12 w-12 border-t-4 border-emerald-600 border-opacity-50"></div>
   </div>
 </template>
+
 
 <script setup>
 import { onMounted } from 'vue'

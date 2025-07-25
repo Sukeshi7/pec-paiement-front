@@ -1,22 +1,22 @@
 <template>
   <SiteTestNavbarView />
-  <div class="max-w-5xl mx-auto px-4 py-10">
-    <h1 class="text-3xl font-bold text-gray-800 mb-8">Votre Panier</h1>
+  <div class="max-w-5xl mx-auto px-4 py-10 font-satoshi">
+    <h1 class="text-3xl font-bold text-emerald-800 mb-8">Votre Panier</h1>
 
-    <div v-if="cart.length === 0" class="text-gray-500 text-center">
+    <div v-if="cart.length === 0" class="text-emerald-600 text-center">
       Votre panier est vide.
     </div>
 
     <div v-else>
       <div class="space-y-6">
         <div v-for="(item, index) in cart" :key="index"
-          class="flex items-center justify-between bg-white p-4 rounded shadow">
+             class="flex items-center justify-between bg-white p-4 rounded-xl shadow border border-emerald-100">
           <div class="flex items-center space-x-4">
             <img :src="item.image || 'https://via.placeholder.com/64'" alt="Produit"
-              class="w-16 h-16 object-cover rounded" />
+                 class="w-16 h-16 object-cover rounded-lg" />
             <div>
               <h2 class="font-semibold text-gray-800">{{ item.name }}</h2>
-              <p class="text-amber-600">{{ item.price }} €</p>
+              <p class="text-emerald-600">{{ item.price }} €</p>
             </div>
           </div>
           <button @click="removeItem(index)" class="text-red-500 hover:text-red-700 font-semibold">
@@ -25,25 +25,25 @@
         </div>
       </div>
 
-      <div class="mt-10 bg-gray-50 p-6 rounded shadow">
-        <h3 class="text-lg font-semibold mb-4 text-gray-700">
+      <div class="mt-10 bg-emerald-50 p-6 rounded-xl shadow border border-emerald-100">
+        <h3 class="text-lg font-semibold mb-4 text-emerald-800">
           Informations Client
         </h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label class="block text-sm text-gray-600 mb-1">Nom</label>
+            <label class="block text-sm text-gray-700 mb-1">Nom</label>
             <input v-model="client.name" placeholder="Jean Dupont"
-              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-600" />
+                   class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500" />
           </div>
           <div>
-            <label class="block text-sm text-gray-600 mb-1">Email</label>
+            <label class="block text-sm text-gray-700 mb-1">Email</label>
             <input v-model="client.email" placeholder="jean@example.com"
-              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-600" />
+                   class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500" />
           </div>
           <div class="md:col-span-2">
-            <label class="block text-sm text-gray-600 mb-1">Adresse</label>
+            <label class="block text-sm text-gray-700 mb-1">Adresse</label>
             <input v-model="client.address" placeholder="123 rue Exemple, Paris"
-              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-600" />
+                   class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500" />
           </div>
         </div>
       </div>
@@ -52,7 +52,7 @@
         <div class="text-xl font-bold text-gray-800">Total : {{ total }} €</div>
 
         <button :disabled="loading" @click="createTransaction"
-          class="bg-amber-600 hover:bg-amber-700 text-white px-6 py-2 rounded shadow disabled:opacity-50">
+                class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-xl shadow disabled:opacity-50 transition">
           {{ loading ? 'Création...' : 'Valider et Payer' }}
         </button>
       </div>
@@ -63,6 +63,7 @@
     </div>
   </div>
 </template>
+
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
