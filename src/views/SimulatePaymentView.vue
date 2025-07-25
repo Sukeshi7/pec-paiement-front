@@ -9,26 +9,17 @@
 
     <div v-else>
       <div class="space-y-6">
-        <div
-          v-for="(item, index) in cart"
-          :key="index"
-          class="flex items-center justify-between bg-white p-4 rounded shadow"
-        >
+        <div v-for="(item, index) in cart" :key="index"
+          class="flex items-center justify-between bg-white p-4 rounded shadow">
           <div class="flex items-center space-x-4">
-            <img
-              :src="item.image || 'https://via.placeholder.com/64'"
-              alt="Produit"
-              class="w-16 h-16 object-cover rounded"
-            />
+            <img :src="item.image || 'https://via.placeholder.com/64'" alt="Produit"
+              class="w-16 h-16 object-cover rounded" />
             <div>
               <h2 class="font-semibold text-gray-800">{{ item.name }}</h2>
               <p class="text-amber-600">{{ item.price }} €</p>
             </div>
           </div>
-          <button
-            @click="removeItem(index)"
-            class="text-red-500 hover:text-red-700 font-semibold"
-          >
+          <button @click="removeItem(index)" class="text-red-500 hover:text-red-700 font-semibold">
             Supprimer
           </button>
         </div>
@@ -41,27 +32,18 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label class="block text-sm text-gray-600 mb-1">Nom</label>
-            <input
-              v-model="client.name"
-              placeholder="Jean Dupont"
-              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-600"
-            />
+            <input v-model="client.name" placeholder="Jean Dupont"
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-600" />
           </div>
           <div>
             <label class="block text-sm text-gray-600 mb-1">Email</label>
-            <input
-              v-model="client.email"
-              placeholder="jean@example.com"
-              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-600"
-            />
+            <input v-model="client.email" placeholder="jean@example.com"
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-600" />
           </div>
           <div class="md:col-span-2">
             <label class="block text-sm text-gray-600 mb-1">Adresse</label>
-            <input
-              v-model="client.address"
-              placeholder="123 rue Exemple, Paris"
-              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-600"
-            />
+            <input v-model="client.address" placeholder="123 rue Exemple, Paris"
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-600" />
           </div>
         </div>
       </div>
@@ -69,11 +51,8 @@
       <div class="mt-8 flex justify-between items-center border-t pt-6">
         <div class="text-xl font-bold text-gray-800">Total : {{ total }} €</div>
 
-        <button
-          :disabled="loading"
-          @click="createTransaction"
-          class="bg-amber-600 hover:bg-amber-700 text-white px-6 py-2 rounded shadow disabled:opacity-50"
-        >
+        <button :disabled="loading" @click="createTransaction"
+          class="bg-amber-600 hover:bg-amber-700 text-white px-6 py-2 rounded shadow disabled:opacity-50">
           {{ loading ? 'Création...' : 'Valider et Payer' }}
         </button>
       </div>
@@ -119,9 +98,10 @@ const total = computed(() =>
 const createTransaction = async () => {
   loading.value = true
   error.value = ''
-
-  const appId = import.meta.env.VITE_MERCHANT_APP_ID
-  const appSecret = import.meta.env.VITE_MERCHANT_APP_SECRET
+  const appId = sessionStorage.getItem('test_app_id')
+  const appSecret = sessionStorage.getItem('test_app_secret')
+  // const appId = import.meta.env.VITE_MERCHANT_APP_ID
+  // const appSecret = import.meta.env.VITE_MERCHANT_APP_SECRET
   try {
     const { data } = await axios.post(`${apiUrl}/transactions`, {
       amount: total.value,
@@ -133,14 +113,14 @@ const createTransaction = async () => {
       redirectSuccessUrl: `${window.location.origin}/payment-success`,
       redirectCancelUrl: `${window.location.origin}/payment-cancel`,
       callbackUrl: `${apiUrl}/callback`
-     
+
     },
-  {
-    headers: {
-      appId,
-      appSecret
-    }
-  })
+      {
+        headers: {
+          appId,
+          appSecret
+        }
+      })
 
     localStorage.setItem('lastTransactionId', data.transactionId)
     router.push('/checkout')
@@ -153,4 +133,3 @@ const createTransaction = async () => {
 }
 
 </script>
-

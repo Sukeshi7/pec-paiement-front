@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen flex flex-col justify-center items-center bg-red-50 text-center px-4">
-    <h1 class="text-3xl font-bold text-red-700 mb-4">❌ Paiement Annulé</h1>
+    <h1 class="text-3xl font-bold text-red-700 mb-4">Paiement Annulé</h1>
     <p class="text-gray-700 text-lg">Votre paiement a été annulé ou a échoué.</p>
     <router-link
       to="/cart"
